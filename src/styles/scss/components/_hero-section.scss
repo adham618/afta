@@ -1,0 +1,118 @@
+.hero-section {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  .bg-img {
+    @include size(100%, 100vh);
+    position: absolute;
+    top: 0;
+    left: 0;
+    img {
+      @include size(100%, 100%);
+      object-fit: cover;
+    }
+  }
+  .hero-content {
+    @include absolute(0, 0);
+    @include size(100%, 100vh);
+    padding-bottom: 110px;
+    display: flex;
+    align-items: flex-end;
+    color: $white;
+    z-index: 9;
+
+    h3 {
+      font-size: 54px;
+      font-weight: 600;
+      font-family: $Oswald;
+    }
+    .desc {
+      font-size: 19px;
+      font-weight: 600;
+    }
+    .btn-register {
+      @include size(207px, 63px);
+      border-radius: 0;
+      font-size: 20px;
+      font-weight: 600;
+      margin-top: 40px;
+    }
+    .rotate-text {
+      position: absolute;
+      right: 0;
+      bottom: 166px;
+      transform-origin: center;
+      transform: translateY(-100%) rotate(90deg);
+      p {
+        font-size: 15px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        position: relative;
+        margin: 0;
+        &:after {
+          @include pseudo();
+          height: 110px;
+          width: 2px;
+          background-color: #ffffff;
+          position: absolute;
+          right: -65px;
+          bottom: -40px;
+          transform: rotate(90deg);
+        }
+      }
+    }
+  }
+}
+
+//item-slider
+.item-slider {
+  height: 100vh;
+  position: relative;
+}
+
+//hero-section-sm
+.hero-section-sm {
+  @include size(100%, 600px);
+  position: relative;
+  img {
+    @include size(100%, 100%);
+    object-fit: cover;
+  }
+  .hero-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    padding-top: 290px;
+    .content-inner {
+      width: 100%;
+      .content {
+        h3 {
+          font-size: 64px;
+          font-weight: 600;
+          color: $white;
+          margin-bottom: 15px;
+        }
+        p {
+          font-size: 24px;
+          color: $white;
+          font-weight: 600;
+          position: relative;
+          display: inline-block;
+          &:after {
+            @include pseudo();
+            @include size(700px, 2px);
+            background-color: $white;
+            position: absolute;
+            right: -710px;
+            top: 16px;
+          }
+        }
+      }
+    }
+  }
+}

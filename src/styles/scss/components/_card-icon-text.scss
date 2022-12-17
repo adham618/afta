@@ -1,0 +1,33 @@
+.card-icon-text {
+  background: $white;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 18px;
+  .icon-bar {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    .icon {
+      img {
+        height: 40px;
+      }
+    }
+  }
+  .text-bar {
+    h3 {
+      font-size: 24px;
+      font-weight: 500;
+      color: $black;
+      font-family: $Oswald;
+      margin: 0 0 20px 0;
+    }
+    p {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 24px;
+      color: $black;
+      margin: 0;
+    }
+  }
+}

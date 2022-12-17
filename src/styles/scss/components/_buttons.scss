@@ -1,0 +1,42 @@
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  //  btn-flat
+  &.btn-flat {
+    border: none;
+  }
+
+  //  btn-invite
+  &.btn-invite {
+    border-radius: 0;
+    height: 58px;
+    width: 300px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: $Gilroy;
+    border-color: $green;
+    border-width: 2px;
+    color: $green;
+    &:hover {
+      background-color: $green;
+      color: $white;
+    }
+  }
+  //  view-all-news
+  &.view-all-news {
+    padding: 0;
+    color: $green;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: $openSans;
+    display: flex;
+    align-items: center;
+
+    .arrow-right {
+      width: 8px;
+      margin-left: 10px;
+    }
+  }
+}

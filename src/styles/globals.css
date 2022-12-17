@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .layout {
+    /* 1100px */
+    max-width: 90rem;
+    @apply tw-mx-auto tw-w-11/12;
+  }
+
+  .bg-dark a.custom-link {
+    @apply tw-hover:border-gray-200/0 tw-border-gray-200;
+  }
+
+  /* Class to adjust with sticky footer */
+  .min-h-main {
+    @apply tw-min-h-[calc(100vh-56px)];
+  }
+}
+body,
+html {
+  scroll-behavior: smooth !important;
+}
+@layer utilities {
+  .animated-underline {
+    background-image: linear-gradient(#33333300, #33333300),
+      linear-gradient(
+        to right,
+        var(--color-primary-400),
+        var(--color-primary-500)
+      );
+    background-size: 100% 2px, 0 2px;
+    background-position: 100% 100%, 0 100%;
+    background-repeat: no-repeat;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .animated-underline {
+      transition: 0.3s ease;
+      transition-property: background-size, color, background-color,
+        border-color;
+    }
+  }
+  .animated-underline:hover,
+  .animated-underline:focus-visible {
+    background-size: 0 2px, 100% 2px;
+  }
+}
+.react-tel-input .country-list .flag {
+  margin-top: 9px !important;
+}
+.react-tel-input .selected-flag:focus:before,
+.react-tel-input .selected-flag.open:before {
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.yarl__slide_image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  max-width: 90vw !important;
+  max-height: 70vh !important;
+}
+/* swiper */
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  display: none;
+}
+.swiper-button-next {
+  background: inherit;
+  background-image: url(/svg/next.svg);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+}
+.swiper-button-prev {
+  background: inherit;
+  background-image: url(/svg/prev.svg);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+}
+#__next {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+@media screen and (min-width: 1020px) and (max-width: 1150px) {
+  .register-button {
+    display: none !important;
+  }
+}
+@media screen and (max-width: 992px) {
+  .header-top-right {
+    display: none !important;
+  }
+  .nav-link {
+    font-size: 32px !important;
+    font-weight: 500 !important;
+  }
+  .nav-item {
+    margin-bottom: 20px !important;
+  }
+  nav .dropdown-menu {
+    @apply tw-mt-1 tw-border-none tw-bg-[unset];
+  }
+  nav .dropdown-menu .dropdown-item {
+    @apply tw-mb-2 tw-px-5 tw-text-xl tw-text-[#9CA69C];
+  }
+  .main-header .header-base {
+    flex-direction: column-reverse;
+  }
+  .main-header .header-date p {
+    margin-bottom: 0 !important;
+  }
+  .hero-section .hero-content .rotate-text {
+    display: none !important;
+  }
+}
+@media screen and (min-width: 992px) {
+  .header-top-right {
+    display: flex !important;
+  }
+  .menu-button {
+    display: none !important;
+  }
+}
+
+.goog-logo-link {
+  display: none !important;
+}
+.goog-te-gadget {
+  color: transparent !important;
+}
+.goog-te-banner-frame {
+  display: none !important;
+}
+
+#goog-gt-tt,
+.goog-te-balloon-frame {
+  display: none !important;
+}
+.goog-text-highlight {
+  background: none !important;
+  box-shadow: none !important;
+}
+body {
+  top: 0 !important;
+}
+.goog-te-gadget {
+  display: none !important;
+}

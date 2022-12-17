@@ -1,0 +1,38 @@
+.dropdown {
+  .dropdown-toggle {
+    &::after {
+      @include pseudo();
+      @include size(16px, 9px);
+      background-image: url('/images/green-arrow-down.png');
+      margin-left: 12px;
+      border: none;
+    }
+  }
+  .dropdown-menu {
+    --bs-dropdown-font-size: 14px;
+    --bs-dropdown-min-width: 136px;
+    --bs-dropdown-padding-x: 0;
+    --bs-dropdown-padding-y: 0;
+    --bs-dropdown-border-color: #9ca69c;
+    --bs-dropdown-border-radius: 5px;
+    --bs-dropdown-divider-margin-y: 0;
+    --bs-dropdown-link-color: #123150;
+    --bs-dropdown-link-hover-color: #1e2125;
+    --bs-dropdown-link-hover-bg: rgba(18, 49, 80, 0.05);
+    --bs-dropdown-link-active-color: $blue;
+    --bs-dropdown-link-active-bg: transparent;
+    --bs-dropdown-link-disabled-color: #adb5bd;
+    --bs-dropdown-item-padding-x: 12px;
+    --bs-dropdown-item-padding-y: 0px;
+  }
+
+  &.language-dropdown {
+    .btn {
+      display: flex;
+      align-items: center;
+    }
+    .flag-icon {
+      margin-right: 12px;
+    }
+  }
+}

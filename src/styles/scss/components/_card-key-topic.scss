@@ -1,0 +1,23 @@
+.card-key-topic {
+  @include size(100%, 280px);
+  border-radius: 10px;
+  margin-bottom: 15px;
+  position: relative;
+  display: block;
+  img {
+    @include size(100%, 100%);
+    object-fit: cover;
+  }
+  .title {
+    position: absolute;
+    left: 30px;
+    bottom: 30px;
+    font-size: 24px;
+    font-weight: 500;
+    font-family: $Oswald;
+    color: $white;
+    margin: 0;
+    z-index: 99;
+    text-transform: uppercase;
+  }
+}

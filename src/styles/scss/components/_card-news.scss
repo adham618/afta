@@ -1,0 +1,33 @@
+.card-news {
+  .cover {
+    height: 440px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    img {
+      @include size(100%, 100%);
+      object-fit: cover;
+      border-radius: 10px;
+    }
+  }
+  .content {
+    h3 {
+      font-size: 20px;
+      line-height: 162%;
+      font-weight: 500;
+      color: #123150;
+      margin: 0;
+      text-transform: uppercase;
+    }
+    span {
+      font-size: 16px;
+      line-height: 1;
+      font-weight: 400;
+      color: $black;
+      display: block;
+      border-left: 2px solid $green;
+      padding-left: 10px;
+      margin-top: 15px;
+    }
+  }
+}

@@ -1,0 +1,201 @@
+/* -------------------------------------------
+Mixins styles here... */
+
+// Sizing shortcuts
+@mixin size($width, $height) {
+  width: $width;
+  height: $height;
+}
+// min Sizing shortcuts
+@mixin min-size($width, $height) {
+  min-width: $width;
+  min-height: $height;
+}
+// max Sizing shortcuts
+@mixin max-size($width, $height) {
+  max-width: $width;
+  max-height: $height;
+}
+
+// Link
+@mixin link($color-link) {
+  text-decoration: none;
+  color: $color-link;
+}
+
+// List type
+@mixin list-style {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+// Center-align a block level element
+@mixin center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Absolute Position
+@mixin absolute($top: null, $right: null, $bottom: null, $left: null) {
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+  position: absolute;
+}
+
+// Fixed Position
+@mixin fixed($top: null, $right: null, $bottom: null, $left: null) {
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+  position: fixed;
+}
+
+@mixin display-flex($flex) {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: $flex;
+}
+@mixin align-items($center) {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: $center;
+}
+@mixin justify-content($center) {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: $center;
+}
+@mixin justify-content-between {
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+@mixin justify-content-start {
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+@mixin justify-content-end {
+  --webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+@mixin flex-direction-column {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+@mixin flex-direction-row {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+@mixin flex-direction-row-reverse {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+}
+@mixin flex-wrap($value) {
+  -ms-flex-wrap: $value;
+  flex-wrap: $value;
+}
+// Display Flexbox
+@mixin display-center {
+  @include display-flex(flex);
+  @include align-items(center);
+  @include justify-content(center);
+}
+
+// Breakpoints
+@mixin breakpoint($point) {
+  @if $point == xxl {
+    @media only screen and (min-width: 1400px) {
+      @content;
+    }
+  } @else if $point == laptop {
+    @media (min-width: 1024px) and (max-width: 1500px) {
+      @content;
+    }
+  } @else if $point == xl {
+    @media only screen and (min-width: 1200px) {
+      @content;
+    }
+  } @else if $point == md {
+    @media only screen and (max-width: 991px) {
+      @content;
+    }
+  } @else if $point == sm {
+    @media only screen and (max-width: 767px) {
+      @content;
+    }
+  } @else if $point == xs {
+    @media only screen and (max-width: 576px) {
+      @content;
+    }
+  }
+}
+
+//Input placeholder
+@mixin input-placeholder {
+  &.placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+  &::-webkit-input-placeholder {
+    @content;
+  }
+}
+
+// Round Ball
+@mixin roundball {
+  border-radius: 50%;
+}
+
+// Text Ellipsis
+@mixin ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+
+// pseudo
+@mixin pseudo($display: block, $content: '') {
+  content: $content;
+  display: $display;
+}
+
+//Transition
+@mixin transition(
+  $for: all,
+  $time-in: 250ms,
+  $type: ease-in-out,
+  $time-out: 0s
+) {
+  transition: $for $time-in $type $time-out;
+  -moz-transition: $for $time-in $type $time-out;
+  -webkit-transition: $for $time-in $type $time-out;
+  -o-transition: $for $time-in $type $time-out;
+}
+//transform
+@mixin transform($property) {
+  -webkit-transform: $property;
+  -ms-transform: $property;
+  transform: $property;
+}
