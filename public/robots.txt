@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://kwahusummit.com
+
+# Sitemaps
+Sitemap: https://kwahusummit.com/sitemap.xml

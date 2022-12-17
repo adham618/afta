@@ -19,6 +19,14 @@ const RegistrationSection = () => {
     intraAfrica: string;
     presidential: string;
     ParticipantCategories: string;
+    // Corporate
+    Institution: string;
+    OfficeORDepartment: string;
+    CorporateAddress: string;
+    CorporateContactNumber: string;
+    CorporateEmail: string;
+    CorporateLocation: string;
+    // others
   };
   const {
     register,
@@ -105,6 +113,30 @@ const RegistrationSection = () => {
     ParticipantCategories: {
       required: "The Participant Categories Field is required",
     },
+    // Corporate
+    Institution: {
+      required: "The Institution Field is required",
+    },
+    OfficeORDepartment: {
+      required: "The Office or Department Field is required",
+    },
+    CorporateAddress: {
+      required: "The Corporate Address Field is required",
+    },
+    CorporateContactNumber: {
+      required: "The Corporate Contact Number Field is required",
+    },
+    CorporateEmail: {
+      required: "The Corporate Email Field is required",
+      pattern: {
+        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+        message: "Invalid email address",
+      },
+    },
+    CorporateLocation: {
+      required: "The Corporate Location Field is required",
+    },
+    // others
   };
   return (
     <form
@@ -327,7 +359,7 @@ const RegistrationSection = () => {
                 id="pc"
                 defaultValue=""
               >
-                <option value="" disabled hidden>
+                <option value="" disabled>
                   Select
                 </option>
                 <option value="Corporate">Corporate</option>
@@ -342,7 +374,113 @@ const RegistrationSection = () => {
             </div>
           </div>
           {watch("ParticipantCategories") === "Corporate" ? (
-            <div>Corporate</div>
+            <>
+              <div className="col-md-3">
+                <div className="regi-form">
+                  <input
+                    className="form-control"
+                    type="text"
+                    placeholder="Institution*"
+                    {...register("Institution", registerOptions.Institution)}
+                  />
+                  {errors.Institution && (
+                    <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
+                      {errors.Institution.message}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="col-md-3">
+                <div className="regi-form">
+                  <input
+                    className="form-control"
+                    type="text"
+                    placeholder=" Office/Department.*"
+                    {...register(
+                      "OfficeORDepartment",
+                      registerOptions.OfficeORDepartment
+                    )}
+                  />
+                  {errors.OfficeORDepartment && (
+                    <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
+                      {errors.OfficeORDepartment.message}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="col-md-3">
+                <div className="regi-form">
+                  <input
+                    className="form-control"
+                    type="text"
+                    placeholder="Address*"
+                    {...register(
+                      "CorporateAddress",
+                      registerOptions.CorporateAddress
+                    )}
+                  />
+                  {errors.CorporateAddress && (
+                    <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
+                      {errors.CorporateAddress.message}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="col-md-3">
+                <div className="regi-form">
+                  <input
+                    className="form-control"
+                    type="number"
+                    placeholder="Contact number*"
+                    {...register(
+                      "CorporateContactNumber",
+                      registerOptions.CorporateContactNumber
+                    )}
+                  />
+                  {errors.CorporateContactNumber && (
+                    <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
+                      {errors.CorporateContactNumber.message}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="col-md-3">
+                <div className="regi-form">
+                  <input
+                    className="form-control"
+                    type="email"
+                    placeholder="Email*"
+                    {...register(
+                      "CorporateEmail",
+                      registerOptions.CorporateEmail
+                    )}
+                  />
+                  {errors.CorporateEmail && (
+                    <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
+                      {errors.CorporateEmail.message}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="col-md-3">
+                <div className="regi-form">
+                  <input
+                    className="form-control"
+                    type="text"
+                    placeholder="Location*"
+                    {...register(
+                      "CorporateLocation",
+                      registerOptions.CorporateLocation
+                    )}
+                  />
+                  {errors.CorporateLocation && (
+                    <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
+                      {errors.CorporateLocation.message}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </>
           ) : watch("ParticipantCategories") === "Diplomat" ? (
             <div>Diplomat</div>
           ) : (
