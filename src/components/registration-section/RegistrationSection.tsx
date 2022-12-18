@@ -768,7 +768,7 @@ const RegistrationSection = () => {
             )
           )}
 
-          <div className="col-md-12">
+          <div className="col-md-12 tw-mb-5">
             <div className="regi-form !tw-mb-4">
               <label htmlFor="STATE">I will attend:*</label>
             </div>
@@ -797,9 +797,7 @@ const RegistrationSection = () => {
           </div>
           <div className="col-md-12 tw-mb-5">
             <div className="regi-form !tw-mb-4">
-              <label htmlFor="STATE">
-                Do you wish to sponsor this event? *
-              </label>
+              <label>Do you wish to sponsor this event? *</label>
             </div>
             <div className="regi-form regi-checkbox mb-0 !tw-mb-2 !tw-items-start sm:!tw-items-center">
               <input
