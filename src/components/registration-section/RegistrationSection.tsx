@@ -42,6 +42,7 @@ const RegistrationSection = () => {
     OthersLocation: string;
     //
     sponsorThisEvent: string;
+    packageOfSponsorship: string;
   };
   const {
     register,
@@ -197,6 +198,13 @@ const RegistrationSection = () => {
     },
     OthersLocation: {
       required: "The Others Location Field is required",
+    },
+    // packageOfSponsorship
+    sponsorThisEvent: {
+      required: "The Sponsor This Event Field is required",
+    },
+    packageOfSponsorship: {
+      required: "The Package of Sponsorship Field is required",
     },
   };
   return (
@@ -824,7 +832,36 @@ const RegistrationSection = () => {
               </label>
             </div>
           </div>
-          {watch("sponsorThisEvent") === "No" && <></>}
+          {watch("sponsorThisEvent") === "Yes" && (
+            <div className="col-md-12">
+              <div className="regi-form">
+                <label>
+                  Which package of sponsorship do you which to apply for?
+                </label>
+                <select
+                  {...register(
+                    "packageOfSponsorship",
+                    registerOptions.packageOfSponsorship
+                  )}
+                  id="pc"
+                  defaultValue=""
+                >
+                  <option value="" disabled>
+                    Select
+                  </option>
+                  <option value="Platinum">Platinum</option>
+                  <option value="Diamond">Diamond</option>
+                  <option value="Gold">Gold</option>
+                  <option value="Silver">Silver</option>
+                </select>
+                {errors.ParticipantCategories && (
+                  <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
+                    {errors.ParticipantCategories.message}
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
 
           <div className="col-md-12">
             <div className="regi-form">
