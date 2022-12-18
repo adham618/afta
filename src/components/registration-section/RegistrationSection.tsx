@@ -803,8 +803,9 @@ const RegistrationSection = () => {
               <input
                 className="tw-mr-2.5 tw-h-4 tw-w-4 tw-cursor-pointer tw-rounded-full  !tw-border-2 tw-border-solid !tw-border-[#00A139] tw-text-[#00A139] tw-ring-offset-0 focus:tw-shadow-none focus:tw-ring-0 focus:tw-ring-offset-0"
                 type="radio"
-                id="sponsor-this-event"
                 {...register("sponsorThisEvent")}
+                value="Yes"
+                id="sponsor-this-event"
               />
               <label className="tw-leading-5" htmlFor="sponsor-Yes">
                 Yes
@@ -814,8 +815,9 @@ const RegistrationSection = () => {
               <input
                 className="tw-mr-2.5 tw-h-4 tw-w-4 tw-cursor-pointer tw-rounded-full  !tw-border-2 tw-border-solid !tw-border-[#00A139] tw-text-[#00A139] tw-ring-offset-0 focus:tw-shadow-none focus:tw-ring-0 focus:tw-ring-offset-0"
                 type="radio"
-                id="sponsor-No"
                 {...register("sponsorThisEvent")}
+                value="No"
+                id="sponsor-No"
               />
               <label className="tw-leading-5" htmlFor="sponsor-No">
                 No
