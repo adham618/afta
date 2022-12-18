@@ -874,7 +874,7 @@ const RegistrationSection = () => {
           </div>
           <div className="col-md-12 tw-mb-5">
             <div className="regi-form !tw-mb-4">
-              <label htmlFor="STATE">I will attend:*</label>
+              <label htmlFor="STATE">I will attend: *</label>
             </div>
             <div className="regi-form regi-checkbox !tw-mb-2 !tw-items-start sm:!tw-items-center">
               <input
@@ -915,7 +915,7 @@ const RegistrationSection = () => {
           </div>
           <div className="col-md-12 tw-mb-5">
             <div className="regi-form !tw-mb-4">
-              <label htmlFor="STATE">Registration fee*</label>
+              <label htmlFor="STATE">Registration fee *</label>
             </div>
             <div className="regi-form regi-checkbox !tw-mb-2 !tw-items-start sm:!tw-items-center">
               <input
