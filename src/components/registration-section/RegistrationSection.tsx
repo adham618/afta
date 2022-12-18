@@ -44,6 +44,8 @@ const RegistrationSection = () => {
     packageOfSponsorship: string;
     FirstTimeAttending: string;
     IWillAttend: string;
+    preferredSummitPackage: string;
+    RegistrationFee: string;
   };
   const {
     register,
@@ -206,6 +208,9 @@ const RegistrationSection = () => {
     },
     packageOfSponsorship: {
       required: "The Package of Sponsorship Field is required",
+    },
+    preferredSummitPackage: {
+      required: "The Preferred Summit Package Field is required",
     },
   };
   return (
@@ -906,6 +911,84 @@ const RegistrationSection = () => {
               <label className="tw-leading-5" htmlFor="both">
                 Both
               </label>
+            </div>
+          </div>
+          <div className="col-md-12 tw-mb-5">
+            <div className="regi-form !tw-mb-4">
+              <label htmlFor="STATE">Registration fee*</label>
+            </div>
+            <div className="regi-form regi-checkbox !tw-mb-2 !tw-items-start sm:!tw-items-center">
+              <input
+                className="tw-mr-2.5 tw-h-4 tw-w-4 tw-cursor-pointer tw-rounded-full  !tw-border-2 tw-border-solid !tw-border-[#00A139] tw-text-[#00A139] tw-ring-offset-0 focus:tw-shadow-none focus:tw-ring-0 focus:tw-ring-offset-0"
+                type="radio"
+                id="DiplomatFee"
+                value="free"
+                {...register("RegistrationFee")}
+              />
+              <label
+                className="!tw-flex tw-w-[300px] tw-items-center tw-justify-between tw-leading-5"
+                htmlFor="DiplomatFee"
+              >
+                <span>Diplomat</span> <span>free</span>
+              </label>
+            </div>
+            <div className="regi-form regi-checkbox !tw-mb-2 !tw-items-start sm:!tw-items-center">
+              <input
+                className="tw-mr-2.5 tw-h-4 tw-w-4 tw-cursor-pointer tw-rounded-full  !tw-border-2 tw-border-solid !tw-border-[#00A139] tw-text-[#00A139] tw-ring-offset-0 focus:tw-shadow-none focus:tw-ring-0 focus:tw-ring-offset-0"
+                type="radio"
+                id="CorporateFee"
+                value="$p"
+                {...register("RegistrationFee")}
+              />
+              <label
+                className="!tw-flex tw-w-[300px] tw-items-center tw-justify-between tw-leading-5"
+                htmlFor="CorporateFee"
+              >
+                <span>Corporate</span> <span>$p</span>
+              </label>
+            </div>
+            <div className="regi-form regi-checkbox !tw-mb-2 !tw-items-start sm:!tw-items-center">
+              <input
+                className="tw-mr-2.5 tw-h-4 tw-w-4 tw-cursor-pointer tw-rounded-full  !tw-border-2 tw-border-solid !tw-border-[#00A139] tw-text-[#00A139] tw-ring-offset-0 focus:tw-shadow-none focus:tw-ring-0 focus:tw-ring-offset-0"
+                type="radio"
+                id="IndividualFee"
+                value="$500"
+                {...register("RegistrationFee")}
+              />
+              <label
+                className="!tw-flex tw-w-[300px] tw-items-center tw-justify-between tw-leading-5"
+                htmlFor="IndividualFee"
+              >
+                <span>Individual</span> <span>$500</span>
+              </label>
+            </div>
+          </div>
+          <div className="col-md-12">
+            <div className="regi-form">
+              <label htmlFor="pc">
+                Kindly select your preferred Summit package: *
+              </label>
+              <select
+                {...register(
+                  "preferredSummitPackage",
+                  registerOptions.preferredSummitPackage
+                )}
+                id="pc"
+                defaultValue=""
+              >
+                <option value="" disabled>
+                  Select
+                </option>
+                <option value="Platinum">Platinum</option>
+                <option value="Diamond">Diamond</option>
+                <option value="Gold">Gold</option>
+                <option value="Silver">Silver</option>
+              </select>
+              {errors.preferredSummitPackage && (
+                <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
+                  {errors.preferredSummitPackage.message}
+                </span>
+              )}
             </div>
           </div>
           <div className="col-md-12">
