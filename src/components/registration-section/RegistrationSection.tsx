@@ -19,6 +19,13 @@ const RegistrationSection = () => {
     intraAfrica: string;
     presidential: string;
     ParticipantCategories: string;
+    // Diplomat
+    DiplomatCountry: string;
+    NameOfOfficeOrMinistryOrDepartment: string;
+    DiplomatAddress: string;
+    DiplomatContactNumber: string;
+    DiplomatEmail: string;
+    DiplomatLocation: string;
     // Corporate
     Institution: string;
     OfficeORDepartment: string;
@@ -27,6 +34,12 @@ const RegistrationSection = () => {
     CorporateEmail: string;
     CorporateLocation: string;
     // others
+    InWhatCapacity: string;
+    InterestInSummit: string;
+    OthersAddress: string;
+    OthersContactNumber: string;
+    OthersEmail: string;
+    OthersLocation: string;
   };
   const {
     register,
@@ -113,6 +126,30 @@ const RegistrationSection = () => {
     ParticipantCategories: {
       required: "The Participant Categories Field is required",
     },
+    // Diplomat
+    DiplomatCountry: {
+      required: "The Diplomat Country Field is required",
+    },
+    NameOfOfficeOrMinistryOrDepartment: {
+      required:
+        "The Name of Office or Ministry or Department Field is required",
+    },
+    DiplomatAddress: {
+      required: "The Diplomat Address Field is required",
+    },
+    DiplomatContactNumber: {
+      required: "The Diplomat Contact Number Field is required",
+    },
+    DiplomatEmail: {
+      required: "The Diplomat Email Field is required",
+      pattern: {
+        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+        message: "Invalid email address",
+      },
+    },
+    DiplomatLocation: {
+      required: "The Diplomat Location Field is required",
+    },
     // Corporate
     Institution: {
       required: "The Institution Field is required",
@@ -137,6 +174,28 @@ const RegistrationSection = () => {
       required: "The Corporate Location Field is required",
     },
     // others
+    InWhatCapacity: {
+      required: "The In What Capacity Field is required",
+    },
+    InterestInSummit: {
+      required: "The Interest in Summit Field is required",
+    },
+    OthersAddress: {
+      required: "The Others Address Field is required",
+    },
+    OthersContactNumber: {
+      required: "The Others Contact Number Field is required",
+    },
+    OthersEmail: {
+      required: "The Others Email Field is required",
+      pattern: {
+        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+        message: "Invalid email address",
+      },
+    },
+    OthersLocation: {
+      required: "The Others Location Field is required",
+    },
   };
   return (
     <form
@@ -482,10 +541,228 @@ const RegistrationSection = () => {
               </div>
             </>
           ) : watch("ParticipantCategories") === "Diplomat" ? (
-            <div>Diplomat</div>
+            <>
+              <div className="col-md-3">
+                <div className="regi-form">
+                  <input
+                    className="form-control"
+                    type="text"
+                    placeholder="Country*"
+                    {...register(
+                      "DiplomatCountry",
+                      registerOptions.DiplomatCountry
+                    )}
+                  />
+                  {errors.DiplomatCountry && (
+                    <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
+                      {errors.DiplomatCountry.message}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="col-md-3">
+                <div className="regi-form">
+                  <input
+                    className="form-control"
+                    type="text"
+                    placeholder="Name of Office/Ministry/Department*"
+                    {...register(
+                      "NameOfOfficeOrMinistryOrDepartment",
+                      registerOptions.NameOfOfficeOrMinistryOrDepartment
+                    )}
+                  />
+                  {errors.NameOfOfficeOrMinistryOrDepartment && (
+                    <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
+                      {errors.NameOfOfficeOrMinistryOrDepartment.message}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="col-md-3">
+                <div className="regi-form">
+                  <input
+                    className="form-control"
+                    type="text"
+                    placeholder="Address*"
+                    {...register(
+                      "DiplomatAddress",
+                      registerOptions.DiplomatAddress
+                    )}
+                  />
+                  {errors.DiplomatAddress && (
+                    <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
+                      {errors.DiplomatAddress.message}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="col-md-3">
+                <div className="regi-form">
+                  <input
+                    className="form-control"
+                    type="number"
+                    placeholder="Contact number*"
+                    {...register(
+                      "DiplomatContactNumber",
+                      registerOptions.DiplomatContactNumber
+                    )}
+                  />
+                  {errors.DiplomatContactNumber && (
+                    <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
+                      {errors.DiplomatContactNumber.message}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="col-md-3">
+                <div className="regi-form">
+                  <input
+                    className="form-control"
+                    type="email"
+                    placeholder="Email*"
+                    {...register(
+                      "DiplomatEmail",
+                      registerOptions.DiplomatEmail
+                    )}
+                  />
+                  {errors.DiplomatEmail && (
+                    <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
+                      {errors.DiplomatEmail.message}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="col-md-3">
+                <div className="regi-form">
+                  <input
+                    className="form-control"
+                    type="text"
+                    placeholder="Location*"
+                    {...register(
+                      "DiplomatLocation",
+                      registerOptions.DiplomatLocation
+                    )}
+                  />
+                  {errors.DiplomatLocation && (
+                    <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
+                      {errors.DiplomatLocation.message}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </>
           ) : (
             watch("ParticipantCategories") === "Others" && (
-              <div className="col-md-12">Other</div>
+              <>
+                <div className="col-md-3">
+                  <div className="regi-form">
+                    <input
+                      className="form-control"
+                      type="text"
+                      placeholder="In what capacity*"
+                      {...register(
+                        "InWhatCapacity",
+                        registerOptions.InWhatCapacity
+                      )}
+                    />
+                    {errors.InWhatCapacity && (
+                      <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
+                        {errors.InWhatCapacity.message}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="col-md-3">
+                  <div className="regi-form">
+                    <input
+                      className="form-control"
+                      type="text"
+                      placeholder="Interest in summit*"
+                      {...register(
+                        "InterestInSummit",
+                        registerOptions.InterestInSummit
+                      )}
+                    />
+                    {errors.InterestInSummit && (
+                      <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
+                        {errors.InterestInSummit.message}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="col-md-3">
+                  <div className="regi-form">
+                    <input
+                      className="form-control"
+                      type="text"
+                      placeholder="Address*"
+                      {...register(
+                        "OthersAddress",
+                        registerOptions.OthersAddress
+                      )}
+                    />
+                    {errors.OthersAddress && (
+                      <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
+                        {errors.OthersAddress.message}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="col-md-3">
+                  <div className="regi-form">
+                    <input
+                      className="form-control"
+                      type="number"
+                      placeholder="Contact number*"
+                      {...register(
+                        "DiplomatContactNumber",
+                        registerOptions.OthersContactNumber
+                      )}
+                    />
+                    {errors.OthersContactNumber && (
+                      <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
+                        {errors.OthersContactNumber.message}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="col-md-3">
+                  <div className="regi-form">
+                    <input
+                      className="form-control"
+                      type="email"
+                      placeholder="Email*"
+                      {...register(
+                        "DiplomatEmail",
+                        registerOptions.OthersEmail
+                      )}
+                    />
+                    {errors.OthersEmail && (
+                      <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
+                        {errors.OthersEmail.message}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="col-md-3">
+                  <div className="regi-form">
+                    <input
+                      className="form-control"
+                      type="text"
+                      placeholder="Location*"
+                      {...register(
+                        "OthersLocation",
+                        registerOptions.OthersLocation
+                      )}
+                    />
+                    {errors.OthersLocation && (
+                      <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
+                        {errors.OthersLocation.message}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </>
             )
           )}
           <div className="col-md-12">
