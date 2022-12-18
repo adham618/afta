@@ -40,6 +40,8 @@ const RegistrationSection = () => {
     OthersContactNumber: string;
     OthersEmail: string;
     OthersLocation: string;
+    //
+    sponsorThisEvent: string;
   };
   const {
     register,
@@ -765,11 +767,40 @@ const RegistrationSection = () => {
               </>
             )
           )}
-          <div className="col-md-12">
-            <div className="regi-form">
-              <label htmlFor="STATE">I will attend:*</label>
+          <div className="col-md-12 tw-mb-5">
+            <div className="regi-form !tw-mb-4">
+              <label htmlFor="STATE">
+                Do you wish to sponsor this event? *
+              </label>
+            </div>
+            <div className="regi-form regi-checkbox mb-0 !tw-mb-2 !tw-items-start sm:!tw-items-center">
+              <input
+                className="tw-mr-2.5 tw-h-4 tw-w-4 tw-cursor-pointer tw-rounded-full  !tw-border-2 tw-border-solid !tw-border-[#00A139] tw-text-[#00A139] tw-ring-offset-0 focus:tw-shadow-none focus:tw-ring-0 focus:tw-ring-offset-0"
+                type="radio"
+                id="sponsor-this-event"
+                {...register("sponsorThisEvent")}
+              />
+              <label className="tw-leading-5" htmlFor="sponsor-Yes">
+                Yes
+              </label>
             </div>
             <div className="regi-form regi-checkbox mb-0 !tw-items-start sm:!tw-items-center">
+              <input
+                className="tw-mr-2.5 tw-h-4 tw-w-4 tw-cursor-pointer tw-rounded-full  !tw-border-2 tw-border-solid !tw-border-[#00A139] tw-text-[#00A139] tw-ring-offset-0 focus:tw-shadow-none focus:tw-ring-0 focus:tw-ring-offset-0"
+                type="radio"
+                id="sponsor-No"
+                {...register("sponsorThisEvent")}
+              />
+              <label className="tw-leading-5" htmlFor="sponsor-No">
+                No
+              </label>
+            </div>
+          </div>
+          <div className="col-md-12">
+            <div className="regi-form !tw-mb-4">
+              <label htmlFor="STATE">I will attend:*</label>
+            </div>
+            <div className="regi-form regi-checkbox mb-0 !tw-mb-2 !tw-items-start sm:!tw-items-center">
               <input
                 className="tw-mr-2.5 tw-h-4 tw-w-4 tw-cursor-pointer tw-rounded-[2px] !tw-border-2 tw-border-solid !tw-border-[#00A139] tw-text-[#00A139] tw-ring-offset-0 focus:tw-shadow-none focus:tw-ring-0 focus:tw-ring-offset-0"
                 type="checkbox"
