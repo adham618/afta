@@ -16,8 +16,7 @@ const RegistrationSection = () => {
     phone: string;
     nationality: string;
     STATE: string;
-    intraAfrica: string;
-    presidential: string;
+
     ParticipantCategories: string;
     // Diplomat
     DiplomatCountry: string;
@@ -43,6 +42,8 @@ const RegistrationSection = () => {
     //
     sponsorThisEvent: string;
     packageOfSponsorship: string;
+    FirstTimeAttending: string;
+    IWillAttend: string;
   };
   const {
     register,
@@ -778,33 +779,6 @@ const RegistrationSection = () => {
 
           <div className="col-md-12 tw-mb-5">
             <div className="regi-form !tw-mb-4">
-              <label htmlFor="STATE">I will attend:*</label>
-            </div>
-            <div className="regi-form regi-checkbox mb-0 !tw-mb-2 !tw-items-start sm:!tw-items-center">
-              <input
-                className="tw-mr-2.5 tw-h-4 tw-w-4 tw-cursor-pointer tw-rounded-[2px] !tw-border-2 tw-border-solid !tw-border-[#00A139] tw-text-[#00A139] tw-ring-offset-0 focus:tw-shadow-none focus:tw-ring-0 focus:tw-ring-offset-0"
-                type="checkbox"
-                id="intra-africa"
-                {...register("intraAfrica")}
-              />
-              <label className="tw-leading-5" htmlFor="intra-africa">
-                Intra-Africa Trade Forum – 26th & 27th January, 2023
-              </label>
-            </div>
-            <div className="regi-form regi-checkbox mb-0 !tw-items-start sm:!tw-items-center">
-              <input
-                className="tw-mr-2.5 tw-h-4 tw-w-4 tw-cursor-pointer tw-rounded-[2px] !tw-border-2 tw-border-solid !tw-border-[#00A139] tw-text-[#00A139] tw-ring-offset-0 focus:tw-shadow-none focus:tw-ring-0 focus:tw-ring-offset-0"
-                type="checkbox"
-                id="presidential"
-                {...register("presidential")}
-              />
-              <label className="tw-leading-5" htmlFor="presidential">
-                Presidential & Business Executives Dialogue – 28th January, 2023
-              </label>
-            </div>
-          </div>
-          <div className="col-md-12 tw-mb-5">
-            <div className="regi-form !tw-mb-4">
               <label>Do you wish to sponsor this event? *</label>
             </div>
             <div className="regi-form regi-checkbox mb-0 !tw-mb-2 !tw-items-start sm:!tw-items-center">
@@ -813,7 +787,7 @@ const RegistrationSection = () => {
                 type="radio"
                 {...register("sponsorThisEvent")}
                 value="Yes"
-                id="sponsor-this-event"
+                id="sponsor-Yes"
               />
               <label className="tw-leading-5" htmlFor="sponsor-Yes">
                 Yes
@@ -862,7 +836,78 @@ const RegistrationSection = () => {
               </div>
             </div>
           )}
-
+          <div className="col-md-12 tw-mb-5">
+            <div className="regi-form !tw-mb-4">
+              <label>
+                First time attending a conference/summit in Ghana? *
+              </label>
+            </div>
+            <div className="regi-form regi-checkbox mb-0 !tw-mb-2 !tw-items-start sm:!tw-items-center">
+              <input
+                className="tw-mr-2.5 tw-h-4 tw-w-4 tw-cursor-pointer tw-rounded-full  !tw-border-2 tw-border-solid !tw-border-[#00A139] tw-text-[#00A139] tw-ring-offset-0 focus:tw-shadow-none focus:tw-ring-0 focus:tw-ring-offset-0"
+                type="radio"
+                {...register("FirstTimeAttending")}
+                value="Yes"
+                id="FirstTimeAttending-Yes"
+              />
+              <label className="tw-leading-5" htmlFor="FirstTimeAttending-Yes">
+                Yes
+              </label>
+            </div>
+            <div className="regi-form regi-checkbox mb-0 !tw-items-start sm:!tw-items-center">
+              <input
+                className="tw-mr-2.5 tw-h-4 tw-w-4 tw-cursor-pointer tw-rounded-full  !tw-border-2 tw-border-solid !tw-border-[#00A139] tw-text-[#00A139] tw-ring-offset-0 focus:tw-shadow-none focus:tw-ring-0 focus:tw-ring-offset-0"
+                type="radio"
+                {...register("FirstTimeAttending")}
+                value="No"
+                id="FirstTimeAttending-No"
+              />
+              <label className="tw-leading-5" htmlFor="FirstTimeAttending-No">
+                No
+              </label>
+            </div>
+          </div>
+          <div className="col-md-12 tw-mb-5">
+            <div className="regi-form !tw-mb-4">
+              <label htmlFor="STATE">I will attend:*</label>
+            </div>
+            <div className="regi-form regi-checkbox !tw-mb-2 !tw-items-start sm:!tw-items-center">
+              <input
+                className="tw-mr-2.5 tw-h-4 tw-w-4 tw-cursor-pointer tw-rounded-full  !tw-border-2 tw-border-solid !tw-border-[#00A139] tw-text-[#00A139] tw-ring-offset-0 focus:tw-shadow-none focus:tw-ring-0 focus:tw-ring-offset-0"
+                type="radio"
+                id="Roundtable"
+                value="Roundtable Presidential dialogue"
+                {...register("IWillAttend")}
+              />
+              <label className="tw-leading-5" htmlFor="Roundtable">
+                Roundtable Presidential dialogue
+              </label>
+            </div>
+            <div className="regi-form regi-checkbox !tw-mb-2 !tw-items-start sm:!tw-items-center">
+              <input
+                className="tw-mr-2.5 tw-h-4 tw-w-4 tw-cursor-pointer tw-rounded-full  !tw-border-2 tw-border-solid !tw-border-[#00A139] tw-text-[#00A139] tw-ring-offset-0 focus:tw-shadow-none focus:tw-ring-0 focus:tw-ring-offset-0"
+                type="radio"
+                id="High-level"
+                value="High level business retreat"
+                {...register("IWillAttend")}
+              />
+              <label className="tw-leading-5" htmlFor="High-level">
+                High level business retreat
+              </label>
+            </div>
+            <div className="regi-form regi-checkbox !tw-mb-2 !tw-items-start sm:!tw-items-center">
+              <input
+                className="tw-mr-2.5 tw-h-4 tw-w-4 tw-cursor-pointer tw-rounded-full  !tw-border-2 tw-border-solid !tw-border-[#00A139] tw-text-[#00A139] tw-ring-offset-0 focus:tw-shadow-none focus:tw-ring-0 focus:tw-ring-offset-0"
+                type="radio"
+                id="both"
+                value="Both"
+                {...register("IWillAttend")}
+              />
+              <label className="tw-leading-5" htmlFor="both">
+                Both
+              </label>
+            </div>
+          </div>
           <div className="col-md-12">
             <div className="regi-form">
               <button disabled={isSubmitting} className="btn btn-reg">
