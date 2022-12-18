@@ -824,6 +824,8 @@ const RegistrationSection = () => {
               </label>
             </div>
           </div>
+          {watch("sponsorThisEvent") === "No" && <></>}
+
           <div className="col-md-12">
             <div className="regi-form">
               <button disabled={isSubmitting} className="btn btn-reg">
