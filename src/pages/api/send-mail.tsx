@@ -3,10 +3,10 @@ import { NextApiRequest, NextApiResponse } from "next";
 let nodemailer = require("nodemailer");
 const transporter = nodemailer.createTransport({
   port: 465,
-  host: "smtp.gmail.com",
+  host: "pegesinc.com",
   auth: {
-    user: process.env.email,
-    pass: process.env.password,
+    user: "ceo@pegesinc.com",
+    pass: "Sniper20202022",
   },
   secure: true,
 });
@@ -18,8 +18,8 @@ export default async function handler(
   const data = req.body;
   // console.log(data);
   const msg = {
-    to: "adhamtarek291@gmail.com", // Change to your recipient
-    from: "adhamtarek291@gmail.com", // Change to your verified sender
+    to: "ceo@pegesinc.com", // Change to your recipient
+    from: "ceo@pegesinc.com", // Change to your verified sender
     subject: "Summit online registration",
     html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
       <html lang="en">
@@ -39,18 +39,19 @@ export default async function handler(
         <div class="img-container" style="display: flex;justify-content: center;align-items: center;border-radius: 5px;overflow: hidden; font-family: 'helvetica', 'ui-sans';">
               </div>
               <div class="container" style="margin-left: 20px;margin-right: 20px;">
-              <h3>You've got a new email from your contact from in your <a href="https://adhamtarek.vercel.app">site</a>  from ${data.firstName} ${data.middleName}, his email is: ✉️ ${data.email} </h3>
-              <div style="font-size: 16px;">
-              <p>Message:</p>
-              <br>
-              </div>
-              <p class="footer" style="font-size: 16px;padding-bottom: 20px;border-bottom: 1px solid #D1D5DB;">Regards<br>${data.firstName}</p>
-              <div class="footer-links" style="display: flex;justify-content: center;align-items: center;">
-                <a href="https://adhamtarek.vercel.app" style="text-decoration: none;margin: 8px;color: #9CA3AF;">Site</a>
-                <a href="https://github.com/adham618/" style="text-decoration: none;margin: 8px;color: #9CA3AF;">GitHub</a>
-                <a href="https://linkedin.com/in/adham-tarek/" style="text-decoration: none;margin: 8px;color: #9CA3AF;">LinkedIn</a>
+            <ul>
+                <li Name: <span>${data.title}</span> <span>${data.firstName}</span>
+                <span>${data.middleName}</span> <span>${data.SURNAME}</span> </li>
+                <li>Gender: ${data.Gender}</li>
+                <li>Email: ${data.email}</li>
+                <li>Phone: ${data.phone}</li>
+                <li>Address: ${data.Address}</li>
+                <li>Organization: ${data.Organization}</li>
+                <li>Nationality: ${data.nationality}</li>
+                <li>State/Region: ${data.STATE}</li>
+                <li>He will attend: ${data.IWillAttend}</li>
+             </ul>
 
-              </div>
               </div>
       </body>
       </html>`,

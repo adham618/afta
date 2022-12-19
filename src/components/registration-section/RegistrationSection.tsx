@@ -14,11 +14,11 @@ const RegistrationSection = () => {
     Gender: string;
     email: string;
     phone: string;
+    Address: string;
+    Organization: string;
     nationality: string;
     STATE: string;
     IWillAttend: string;
-    Address: string;
-    Organization: string;
   };
   const {
     register,
@@ -33,7 +33,7 @@ const RegistrationSection = () => {
   const [submitted, setSubmitted] = React.useState(false);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    // console.log(data);
+    console.log(data);
     fetch("/api/send-mail", {
       method: "POST",
       headers: {
@@ -57,13 +57,6 @@ const RegistrationSection = () => {
 
   //   Handling form registerOptions
   const registerOptions = {
-    title: {
-      required: "The Title Field is required",
-      minLength: {
-        value: 3,
-        message: "Title must be at least 3 characters",
-      },
-    },
     firstName: {
       required: "The First Name Field is required",
       minLength: {
@@ -86,9 +79,6 @@ const RegistrationSection = () => {
         message: "Surname cannot exceed 20 characters",
       },
     },
-    Gender: {
-      required: "The Gender Field is required",
-    },
     email: {
       required: "The Email Field is required",
       pattern: {
@@ -106,19 +96,6 @@ const RegistrationSection = () => {
         value: 11,
         message: "Phone Number cannot exceed 11 characters",
       },
-    },
-    nationality: {
-      required: "The Nationality Field is required",
-    },
-    STATE: {
-      required: "The State Field is required",
-    },
-
-    Address: {
-      required: "The Address Field is required",
-    },
-    Organization: {
-      required: "The Organization Field is required",
     },
   };
   return (
@@ -141,11 +118,11 @@ const RegistrationSection = () => {
             <div className="regi-form">
               <select
                 className="form-control"
-                {...register("title", registerOptions.title)}
+                {...register("title")}
                 defaultValue=""
               >
                 <option value="" disabled hidden>
-                  TITLE*
+                  TITLE
                 </option>
                 <option value="Hon.">Hon.</option>
                 <option value="H.E.">H.E.</option>
@@ -210,12 +187,12 @@ const RegistrationSection = () => {
             <div className="regi-form">
               <select
                 className="form-control"
-                placeholder="Gender*"
-                {...register("Gender", registerOptions.Gender)}
+                placeholder="Gender"
+                {...register("Gender")}
                 defaultValue=""
               >
                 <option value="" disabled hidden>
-                  Gender*
+                  Gender
                 </option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -247,13 +224,13 @@ const RegistrationSection = () => {
               <Controller
                 name="phone"
                 control={control}
-                // rules={registerOptions.phone}
+                rules={registerOptions.phone}
                 render={({ field: { onChange, value } }) => (
                   <PhoneInput
                     value={value}
                     onChange={(value) => onChange(value)}
                     country="gh"
-                    placeholder="PHONE"
+                    placeholder="PHONE*"
                     inputClass="!tw-w-full focus:!tw-border-black focus:!tw-bg-[unset] focus:tw-shadow-outline"
                     dropdownClass="!tw-w-max"
                   />
@@ -271,8 +248,8 @@ const RegistrationSection = () => {
               <input
                 className="form-control"
                 type="text"
-                placeholder="Address*"
-                {...register("Address", registerOptions.Address)}
+                placeholder="Address"
+                {...register("Address")}
               />
               {errors.Address && (
                 <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
@@ -286,8 +263,8 @@ const RegistrationSection = () => {
               <input
                 className="form-control"
                 type="text"
-                placeholder="Organization*"
-                {...register("Organization", registerOptions.Organization)}
+                placeholder="Organization"
+                {...register("Organization")}
               />
               {errors.Organization && (
                 <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
@@ -298,14 +275,13 @@ const RegistrationSection = () => {
           </div>
           <div className="col-md-6">
             <div className="regi-form">
-              <label htmlFor="nationality">Nationality*</label>
+              <label htmlFor="nationality">Nationality</label>
               <Controller
                 name="nationality"
                 control={control}
-                rules={registerOptions.nationality}
                 render={({ field: { onChange, value } }) => (
                   <CountryDropdown
-                    defaultOptionLabel="Select Country*"
+                    defaultOptionLabel="Select Country"
                     value={value}
                     onChange={(value) => onChange(value)}
                   />
@@ -320,15 +296,14 @@ const RegistrationSection = () => {
           </div>
           <div className="col-md-6">
             <div className="regi-form">
-              <label htmlFor="STATE">STATE/REGION*</label>
+              <label htmlFor="STATE">STATE/REGION</label>
               <Controller
                 name="STATE"
                 control={control}
-                rules={registerOptions.STATE}
                 render={({ field: { onChange, value } }) => (
                   <RegionDropdown
                     blankOptionLabel="No country selected, please select one"
-                    defaultOptionLabel="Select State/REGION*"
+                    defaultOptionLabel="Select State/REGION"
                     country={watch("nationality")}
                     value={value}
                     onChange={(value) => onChange(value)}
@@ -347,10 +322,9 @@ const RegistrationSection = () => {
               <h3 className="tw-mb-10">Summit Participation</h3>
             </div>
           </div>
-
           <div className="col-md-12 tw-mb-5">
             <div className="regi-form !tw-mb-4">
-              <label htmlFor="STATE">I will attend: *</label>
+              <label htmlFor="STATE">I will attend:</label>
             </div>
             <div className="regi-form regi-checkbox !tw-mb-2 !tw-items-start sm:!tw-items-center">
               <input
@@ -381,7 +355,7 @@ const RegistrationSection = () => {
                 className="tw-mr-2.5 tw-h-4 tw-w-4 tw-cursor-pointer tw-rounded-full  !tw-border-2 tw-border-solid !tw-border-[#00A139] tw-text-[#00A139] tw-ring-offset-0 focus:tw-shadow-none focus:tw-ring-0 focus:tw-ring-offset-0"
                 type="radio"
                 id="both"
-                value="Both"
+                value="Roundtable Presidential dialogue and High level business retreat"
                 {...register("IWillAttend")}
               />
               <label className="tw-leading-5" htmlFor="both">
