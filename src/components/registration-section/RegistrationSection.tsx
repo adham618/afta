@@ -4,6 +4,7 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import PhoneInput from "react-phone-input-2";
 
 import "react-phone-input-2/lib/bootstrap.css";
+import { useTimeouts } from "yet-another-react-lightbox/core";
 
 const RegistrationSection = () => {
   type Inputs = {
@@ -46,6 +47,7 @@ const RegistrationSection = () => {
         if (res.status === 200) {
           console.log("Email/Password is valid.");
           setshowMessage(true);
+
           setSubmitted(true);
         } else {
           console.log("Email/Password is invalid.");
