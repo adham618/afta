@@ -24,6 +24,7 @@
     "google-map-react": "^2.2.0",
     "lightgallery": "^2.7.0",
     "next": "^13.0.6",
+    "nodemailer": "^6.8.0",
     "react": "^18.2.0",
     "react-country-region-selector": "^3.6.1",
     "react-dom": "^18.2.0",

@@ -16,48 +16,43 @@ const RegistrationSection = () => {
     phone: string;
     nationality: string;
     STATE: string;
-
-    ParticipantCategories: string;
-    // Diplomat
-    DiplomatCountry: string;
-    NameOfOfficeOrMinistryOrDepartment: string;
-    DiplomatAddress: string;
-    DiplomatContactNumber: string;
-    DiplomatEmail: string;
-    DiplomatLocation: string;
-    // Corporate
-    Institution: string;
-    OfficeORDepartment: string;
-    CorporateAddress: string;
-    CorporateContactNumber: string;
-    CorporateEmail: string;
-    CorporateLocation: string;
-    // others
-    InWhatCapacity: string;
-    InterestInSummit: string;
-    OthersAddress: string;
-    OthersContactNumber: string;
-    OthersEmail: string;
-    OthersLocation: string;
-    //
-    sponsorThisEvent: string;
-    packageOfSponsorship: string;
-    FirstTimeAttending: string;
     IWillAttend: string;
-    preferredSummitPackage: string;
-    RegistrationFee: string;
+    Address: string;
+    Organization: string;
   };
   const {
     register,
     handleSubmit,
     watch,
     control,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
+    reset,
+    formState: { errors, isSubmitting },
   } = useForm<Inputs>({ mode: "onChange" });
 
+  const [showMessage, setshowMessage] = React.useState(false);
+  const [submitted, setSubmitted] = React.useState(false);
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    // eslint-disable-next-line no-console
-    console.log(data);
+    // console.log(data);
+    fetch("/api/send-mail", {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          console.log("Email/Password is valid.");
+          setshowMessage(true);
+          setSubmitted(true);
+        } else {
+          console.log("Email/Password is invalid.");
+        }
+      })
+      .catch((e) => console.log(e));
+    reset();
   };
 
   //   Handling form registerOptions
@@ -78,17 +73,6 @@ const RegistrationSection = () => {
       maxLength: {
         value: 20,
         message: "First Name cannot exceed 20 characters",
-      },
-    },
-    middleName: {
-      required: "The Middle Name Field is required",
-      minLength: {
-        value: 3,
-        message: "Middle Name must be at least 3 characters",
-      },
-      maxLength: {
-        value: 20,
-        message: "Middle Name cannot exceed 20 characters",
       },
     },
     SURNAME: {
@@ -129,88 +113,12 @@ const RegistrationSection = () => {
     STATE: {
       required: "The State Field is required",
     },
-    ParticipantCategories: {
-      required: "The Participant Categories Field is required",
+
+    Address: {
+      required: "The Address Field is required",
     },
-    // Diplomat
-    DiplomatCountry: {
-      required: "The Diplomat Country Field is required",
-    },
-    NameOfOfficeOrMinistryOrDepartment: {
-      required:
-        "The Name of Office or Ministry or Department Field is required",
-    },
-    DiplomatAddress: {
-      required: "The Diplomat Address Field is required",
-    },
-    DiplomatContactNumber: {
-      required: "The Diplomat Contact Number Field is required",
-    },
-    DiplomatEmail: {
-      required: "The Diplomat Email Field is required",
-      pattern: {
-        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-        message: "Invalid email address",
-      },
-    },
-    DiplomatLocation: {
-      required: "The Diplomat Location Field is required",
-    },
-    // Corporate
-    Institution: {
-      required: "The Institution Field is required",
-    },
-    OfficeORDepartment: {
-      required: "The Office or Department Field is required",
-    },
-    CorporateAddress: {
-      required: "The Corporate Address Field is required",
-    },
-    CorporateContactNumber: {
-      required: "The Corporate Contact Number Field is required",
-    },
-    CorporateEmail: {
-      required: "The Corporate Email Field is required",
-      pattern: {
-        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-        message: "Invalid email address",
-      },
-    },
-    CorporateLocation: {
-      required: "The Corporate Location Field is required",
-    },
-    // others
-    InWhatCapacity: {
-      required: "The In What Capacity Field is required",
-    },
-    InterestInSummit: {
-      required: "The Interest in Summit Field is required",
-    },
-    OthersAddress: {
-      required: "The Others Address Field is required",
-    },
-    OthersContactNumber: {
-      required: "The Others Contact Number Field is required",
-    },
-    OthersEmail: {
-      required: "The Others Email Field is required",
-      pattern: {
-        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-        message: "Invalid email address",
-      },
-    },
-    OthersLocation: {
-      required: "The Others Location Field is required",
-    },
-    // packageOfSponsorship
-    sponsorThisEvent: {
-      required: "The Sponsor This Event Field is required",
-    },
-    packageOfSponsorship: {
-      required: "The Package of Sponsorship Field is required",
-    },
-    preferredSummitPackage: {
-      required: "The Preferred Summit Package Field is required",
+    Organization: {
+      required: "The Organization Field is required",
     },
   };
   return (
@@ -278,14 +186,9 @@ const RegistrationSection = () => {
               <input
                 className="form-control"
                 type="text"
-                placeholder="MIDDLE NAME*"
-                {...register("middleName", registerOptions.middleName)}
+                placeholder="MIDDLE NAME"
+                {...register("middleName")}
               />
-              {errors.middleName && (
-                <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
-                  {errors.middleName.message}
-                </span>
-              )}
             </div>
           </div>
           <div className="col-md-3">
@@ -369,7 +272,28 @@ const RegistrationSection = () => {
                 className="form-control"
                 type="text"
                 placeholder="Address*"
+                {...register("Address", registerOptions.Address)}
               />
+              {errors.Address && (
+                <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
+                  {errors.Address.message}
+                </span>
+              )}
+            </div>
+          </div>
+          <div className="col-md-12">
+            <div className="regi-form">
+              <input
+                className="form-control"
+                type="text"
+                placeholder="Organization*"
+                {...register("Organization", registerOptions.Organization)}
+              />
+              {errors.Organization && (
+                <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
+                  {errors.Organization.message}
+                </span>
+              )}
             </div>
           </div>
           <div className="col-md-6">
@@ -396,7 +320,7 @@ const RegistrationSection = () => {
           </div>
           <div className="col-md-6">
             <div className="regi-form">
-              <label htmlFor="STATE">STATE*</label>
+              <label htmlFor="STATE">STATE/REGION*</label>
               <Controller
                 name="STATE"
                 control={control}
@@ -404,7 +328,7 @@ const RegistrationSection = () => {
                 render={({ field: { onChange, value } }) => (
                   <RegionDropdown
                     blankOptionLabel="No country selected, please select one"
-                    defaultOptionLabel="Select State*"
+                    defaultOptionLabel="Select State/REGION*"
                     country={watch("nationality")}
                     value={value}
                     onChange={(value) => onChange(value)}
@@ -420,458 +344,10 @@ const RegistrationSection = () => {
           </div>
           <div className="col-md-12">
             <div className="registration-summit">
-              <h3>Summit Participation</h3>
+              <h3 className="tw-mb-10">Summit Participation</h3>
             </div>
           </div>
-          <div className="col-md-12">
-            <div className="regi-form">
-              <label htmlFor="pc">Participant Categories**</label>
-              <select
-                {...register(
-                  "ParticipantCategories",
-                  registerOptions.ParticipantCategories
-                )}
-                id="pc"
-                defaultValue=""
-              >
-                <option value="" disabled>
-                  Select
-                </option>
-                <option value="Corporate">Corporate</option>
-                <option value="Diplomat">Diplomat</option>
-                <option value="Others">Others, specify……………………</option>
-              </select>
-              {errors.ParticipantCategories && (
-                <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
-                  {errors.ParticipantCategories.message}
-                </span>
-              )}
-            </div>
-          </div>
-          {watch("ParticipantCategories") === "Corporate" ? (
-            <>
-              <div className="col-md-3">
-                <div className="regi-form">
-                  <input
-                    className="form-control"
-                    type="text"
-                    placeholder="Institution*"
-                    {...register("Institution", registerOptions.Institution)}
-                  />
-                  {errors.Institution && (
-                    <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
-                      {errors.Institution.message}
-                    </span>
-                  )}
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="regi-form">
-                  <input
-                    className="form-control"
-                    type="text"
-                    placeholder=" Office/Department.*"
-                    {...register(
-                      "OfficeORDepartment",
-                      registerOptions.OfficeORDepartment
-                    )}
-                  />
-                  {errors.OfficeORDepartment && (
-                    <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
-                      {errors.OfficeORDepartment.message}
-                    </span>
-                  )}
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="regi-form">
-                  <input
-                    className="form-control"
-                    type="text"
-                    placeholder="Address*"
-                    {...register(
-                      "CorporateAddress",
-                      registerOptions.CorporateAddress
-                    )}
-                  />
-                  {errors.CorporateAddress && (
-                    <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
-                      {errors.CorporateAddress.message}
-                    </span>
-                  )}
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="regi-form">
-                  <input
-                    className="form-control"
-                    type="number"
-                    placeholder="Contact number*"
-                    {...register(
-                      "CorporateContactNumber",
-                      registerOptions.CorporateContactNumber
-                    )}
-                  />
-                  {errors.CorporateContactNumber && (
-                    <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
-                      {errors.CorporateContactNumber.message}
-                    </span>
-                  )}
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="regi-form">
-                  <input
-                    className="form-control"
-                    type="email"
-                    placeholder="Email*"
-                    {...register(
-                      "CorporateEmail",
-                      registerOptions.CorporateEmail
-                    )}
-                  />
-                  {errors.CorporateEmail && (
-                    <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
-                      {errors.CorporateEmail.message}
-                    </span>
-                  )}
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="regi-form">
-                  <input
-                    className="form-control"
-                    type="text"
-                    placeholder="Location*"
-                    {...register(
-                      "CorporateLocation",
-                      registerOptions.CorporateLocation
-                    )}
-                  />
-                  {errors.CorporateLocation && (
-                    <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
-                      {errors.CorporateLocation.message}
-                    </span>
-                  )}
-                </div>
-              </div>
-            </>
-          ) : watch("ParticipantCategories") === "Diplomat" ? (
-            <>
-              <div className="col-md-3">
-                <div className="regi-form">
-                  <input
-                    className="form-control"
-                    type="text"
-                    placeholder="Country*"
-                    {...register(
-                      "DiplomatCountry",
-                      registerOptions.DiplomatCountry
-                    )}
-                  />
-                  {errors.DiplomatCountry && (
-                    <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
-                      {errors.DiplomatCountry.message}
-                    </span>
-                  )}
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="regi-form">
-                  <input
-                    className="form-control"
-                    type="text"
-                    placeholder="Name of Office/Ministry/Department*"
-                    {...register(
-                      "NameOfOfficeOrMinistryOrDepartment",
-                      registerOptions.NameOfOfficeOrMinistryOrDepartment
-                    )}
-                  />
-                  {errors.NameOfOfficeOrMinistryOrDepartment && (
-                    <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
-                      {errors.NameOfOfficeOrMinistryOrDepartment.message}
-                    </span>
-                  )}
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="regi-form">
-                  <input
-                    className="form-control"
-                    type="text"
-                    placeholder="Address*"
-                    {...register(
-                      "DiplomatAddress",
-                      registerOptions.DiplomatAddress
-                    )}
-                  />
-                  {errors.DiplomatAddress && (
-                    <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
-                      {errors.DiplomatAddress.message}
-                    </span>
-                  )}
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="regi-form">
-                  <input
-                    className="form-control"
-                    type="number"
-                    placeholder="Contact number*"
-                    {...register(
-                      "DiplomatContactNumber",
-                      registerOptions.DiplomatContactNumber
-                    )}
-                  />
-                  {errors.DiplomatContactNumber && (
-                    <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
-                      {errors.DiplomatContactNumber.message}
-                    </span>
-                  )}
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="regi-form">
-                  <input
-                    className="form-control"
-                    type="email"
-                    placeholder="Email*"
-                    {...register(
-                      "DiplomatEmail",
-                      registerOptions.DiplomatEmail
-                    )}
-                  />
-                  {errors.DiplomatEmail && (
-                    <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
-                      {errors.DiplomatEmail.message}
-                    </span>
-                  )}
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="regi-form">
-                  <input
-                    className="form-control"
-                    type="text"
-                    placeholder="Location*"
-                    {...register(
-                      "DiplomatLocation",
-                      registerOptions.DiplomatLocation
-                    )}
-                  />
-                  {errors.DiplomatLocation && (
-                    <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
-                      {errors.DiplomatLocation.message}
-                    </span>
-                  )}
-                </div>
-              </div>
-            </>
-          ) : (
-            watch("ParticipantCategories") === "Others" && (
-              <>
-                <div className="col-md-3">
-                  <div className="regi-form">
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="In what capacity*"
-                      {...register(
-                        "InWhatCapacity",
-                        registerOptions.InWhatCapacity
-                      )}
-                    />
-                    {errors.InWhatCapacity && (
-                      <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
-                        {errors.InWhatCapacity.message}
-                      </span>
-                    )}
-                  </div>
-                </div>
-                <div className="col-md-3">
-                  <div className="regi-form">
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="Interest in summit*"
-                      {...register(
-                        "InterestInSummit",
-                        registerOptions.InterestInSummit
-                      )}
-                    />
-                    {errors.InterestInSummit && (
-                      <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
-                        {errors.InterestInSummit.message}
-                      </span>
-                    )}
-                  </div>
-                </div>
-                <div className="col-md-3">
-                  <div className="regi-form">
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="Address*"
-                      {...register(
-                        "OthersAddress",
-                        registerOptions.OthersAddress
-                      )}
-                    />
-                    {errors.OthersAddress && (
-                      <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
-                        {errors.OthersAddress.message}
-                      </span>
-                    )}
-                  </div>
-                </div>
-                <div className="col-md-3">
-                  <div className="regi-form">
-                    <input
-                      className="form-control"
-                      type="number"
-                      placeholder="Contact number*"
-                      {...register(
-                        "DiplomatContactNumber",
-                        registerOptions.OthersContactNumber
-                      )}
-                    />
-                    {errors.OthersContactNumber && (
-                      <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
-                        {errors.OthersContactNumber.message}
-                      </span>
-                    )}
-                  </div>
-                </div>
-                <div className="col-md-3">
-                  <div className="regi-form">
-                    <input
-                      className="form-control"
-                      type="email"
-                      placeholder="Email*"
-                      {...register(
-                        "DiplomatEmail",
-                        registerOptions.OthersEmail
-                      )}
-                    />
-                    {errors.OthersEmail && (
-                      <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
-                        {errors.OthersEmail.message}
-                      </span>
-                    )}
-                  </div>
-                </div>
-                <div className="col-md-3">
-                  <div className="regi-form">
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="Location*"
-                      {...register(
-                        "OthersLocation",
-                        registerOptions.OthersLocation
-                      )}
-                    />
-                    {errors.OthersLocation && (
-                      <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
-                        {errors.OthersLocation.message}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </>
-            )
-          )}
 
-          <div className="col-md-12 tw-mb-5">
-            <div className="regi-form !tw-mb-4">
-              <label>Do you wish to sponsor this event? *</label>
-            </div>
-            <div className="regi-form regi-checkbox mb-0 !tw-mb-2 !tw-items-start sm:!tw-items-center">
-              <input
-                className="tw-mr-2.5 tw-h-4 tw-w-4 tw-cursor-pointer tw-rounded-full  !tw-border-2 tw-border-solid !tw-border-[#00A139] tw-text-[#00A139] tw-ring-offset-0 focus:tw-shadow-none focus:tw-ring-0 focus:tw-ring-offset-0"
-                type="radio"
-                {...register("sponsorThisEvent")}
-                value="Yes"
-                id="sponsor-Yes"
-              />
-              <label className="tw-leading-5" htmlFor="sponsor-Yes">
-                Yes
-              </label>
-            </div>
-            <div className="regi-form regi-checkbox mb-0 !tw-items-start sm:!tw-items-center">
-              <input
-                className="tw-mr-2.5 tw-h-4 tw-w-4 tw-cursor-pointer tw-rounded-full  !tw-border-2 tw-border-solid !tw-border-[#00A139] tw-text-[#00A139] tw-ring-offset-0 focus:tw-shadow-none focus:tw-ring-0 focus:tw-ring-offset-0"
-                type="radio"
-                {...register("sponsorThisEvent")}
-                value="No"
-                id="sponsor-No"
-              />
-              <label className="tw-leading-5" htmlFor="sponsor-No">
-                No
-              </label>
-            </div>
-          </div>
-          {watch("sponsorThisEvent") === "Yes" && (
-            <div className="col-md-12">
-              <div className="regi-form">
-                <label>
-                  Which package of sponsorship do you which to apply for?
-                </label>
-                <select
-                  {...register(
-                    "packageOfSponsorship",
-                    registerOptions.packageOfSponsorship
-                  )}
-                  id="pc"
-                  defaultValue=""
-                >
-                  <option value="" disabled>
-                    Select
-                  </option>
-                  <option value="Platinum">Platinum</option>
-                  <option value="Diamond">Diamond</option>
-                  <option value="Gold">Gold</option>
-                  <option value="Silver">Silver</option>
-                </select>
-                {errors.ParticipantCategories && (
-                  <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
-                    {errors.ParticipantCategories.message}
-                  </span>
-                )}
-              </div>
-            </div>
-          )}
-          <div className="col-md-12 tw-mb-5">
-            <div className="regi-form !tw-mb-4">
-              <label>
-                First time attending a conference/summit in Ghana? *
-              </label>
-            </div>
-            <div className="regi-form regi-checkbox mb-0 !tw-mb-2 !tw-items-start sm:!tw-items-center">
-              <input
-                className="tw-mr-2.5 tw-h-4 tw-w-4 tw-cursor-pointer tw-rounded-full  !tw-border-2 tw-border-solid !tw-border-[#00A139] tw-text-[#00A139] tw-ring-offset-0 focus:tw-shadow-none focus:tw-ring-0 focus:tw-ring-offset-0"
-                type="radio"
-                {...register("FirstTimeAttending")}
-                value="Yes"
-                id="FirstTimeAttending-Yes"
-              />
-              <label className="tw-leading-5" htmlFor="FirstTimeAttending-Yes">
-                Yes
-              </label>
-            </div>
-            <div className="regi-form regi-checkbox mb-0 !tw-items-start sm:!tw-items-center">
-              <input
-                className="tw-mr-2.5 tw-h-4 tw-w-4 tw-cursor-pointer tw-rounded-full  !tw-border-2 tw-border-solid !tw-border-[#00A139] tw-text-[#00A139] tw-ring-offset-0 focus:tw-shadow-none focus:tw-ring-0 focus:tw-ring-offset-0"
-                type="radio"
-                {...register("FirstTimeAttending")}
-                value="No"
-                id="FirstTimeAttending-No"
-              />
-              <label className="tw-leading-5" htmlFor="FirstTimeAttending-No">
-                No
-              </label>
-            </div>
-          </div>
           <div className="col-md-12 tw-mb-5">
             <div className="regi-form !tw-mb-4">
               <label htmlFor="STATE">I will attend: *</label>
@@ -913,94 +389,22 @@ const RegistrationSection = () => {
               </label>
             </div>
           </div>
-          <div className="col-md-12 tw-mb-5">
-            <div className="regi-form !tw-mb-4">
-              <label htmlFor="STATE">Registration fee *</label>
-            </div>
-            <div className="regi-form regi-checkbox !tw-mb-2 !tw-items-start sm:!tw-items-center">
-              <input
-                className="tw-mr-2.5 tw-h-4 tw-w-4 tw-cursor-pointer tw-rounded-full  !tw-border-2 tw-border-solid !tw-border-[#00A139] tw-text-[#00A139] tw-ring-offset-0 focus:tw-shadow-none focus:tw-ring-0 focus:tw-ring-offset-0"
-                type="radio"
-                id="DiplomatFee"
-                value="free"
-                {...register("RegistrationFee")}
-              />
-              <label
-                className="!tw-flex tw-w-[300px] tw-items-center tw-justify-between tw-leading-5"
-                htmlFor="DiplomatFee"
-              >
-                <span>Diplomat</span> <span>free</span>
-              </label>
-            </div>
-            <div className="regi-form regi-checkbox !tw-mb-2 !tw-items-start sm:!tw-items-center">
-              <input
-                className="tw-mr-2.5 tw-h-4 tw-w-4 tw-cursor-pointer tw-rounded-full  !tw-border-2 tw-border-solid !tw-border-[#00A139] tw-text-[#00A139] tw-ring-offset-0 focus:tw-shadow-none focus:tw-ring-0 focus:tw-ring-offset-0"
-                type="radio"
-                id="CorporateFee"
-                value="$p"
-                {...register("RegistrationFee")}
-              />
-              <label
-                className="!tw-flex tw-w-[300px] tw-items-center tw-justify-between tw-leading-5"
-                htmlFor="CorporateFee"
-              >
-                <span>Corporate</span> <span>$p</span>
-              </label>
-            </div>
-            <div className="regi-form regi-checkbox !tw-mb-2 !tw-items-start sm:!tw-items-center">
-              <input
-                className="tw-mr-2.5 tw-h-4 tw-w-4 tw-cursor-pointer tw-rounded-full  !tw-border-2 tw-border-solid !tw-border-[#00A139] tw-text-[#00A139] tw-ring-offset-0 focus:tw-shadow-none focus:tw-ring-0 focus:tw-ring-offset-0"
-                type="radio"
-                id="IndividualFee"
-                value="$500"
-                {...register("RegistrationFee")}
-              />
-              <label
-                className="!tw-flex tw-w-[300px] tw-items-center tw-justify-between tw-leading-5"
-                htmlFor="IndividualFee"
-              >
-                <span>Individual</span> <span>$500</span>
-              </label>
-            </div>
-          </div>
-          <div className="col-md-12">
-            <div className="regi-form">
-              <label htmlFor="pc">
-                Kindly select your preferred Summit package: *
-              </label>
-              <select
-                {...register(
-                  "preferredSummitPackage",
-                  registerOptions.preferredSummitPackage
-                )}
-                id="pc"
-                defaultValue=""
-              >
-                <option value="" disabled>
-                  Select
-                </option>
-                <option value="Platinum">Platinum</option>
-                <option value="Diamond">Diamond</option>
-                <option value="Gold">Gold</option>
-                <option value="Silver">Silver</option>
-              </select>
-              {errors.preferredSummitPackage && (
-                <span className="tw-mt-2 tw-block tw-text-[14px] tw-font-bold tw-leading-5 tw-text-red-500">
-                  {errors.preferredSummitPackage.message}
-                </span>
-              )}
-            </div>
-          </div>
+
           <div className="col-md-12">
             <div className="regi-form">
               <button disabled={isSubmitting} className="btn btn-reg">
                 Submit
               </button>
             </div>
-            {isSubmitSuccessful && (
-              <div className="tw-mt-2 tw-text-[14px] tw-font-bold tw-text-green-500">
-                Registration Successful
-              </div>
+
+            {showMessage && (
+              <>
+                {submitted && (
+                  <div className="tw-mt-2 tw-text-[14px] tw-font-bold tw-text-green-500">
+                    Registration Successful
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>
