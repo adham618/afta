@@ -46,9 +46,11 @@ const RegistrationSection = () => {
       .then((res) => {
         if (res.status === 200) {
           console.log("Email/Password is valid.");
-          setshowMessage(true);
-
           setSubmitted(true);
+          setshowMessage(true);
+          setTimeout(function () {
+            setshowMessage(false);
+          }, 3000);
         } else {
           console.log("Email/Password is invalid.");
         }
@@ -226,7 +228,7 @@ const RegistrationSection = () => {
               <Controller
                 name="phone"
                 control={control}
-                rules={registerOptions.phone}
+                // rules={registerOptions.phone}
                 render={({ field: { onChange, value } }) => (
                   <PhoneInput
                     value={value}
@@ -377,7 +379,7 @@ const RegistrationSection = () => {
               <>
                 {submitted && (
                   <div className="tw-mt-2 tw-text-[14px] tw-font-bold tw-text-green-500">
-                    Registration Successful
+                    Thank you for registering with us!
                   </div>
                 )}
               </>
